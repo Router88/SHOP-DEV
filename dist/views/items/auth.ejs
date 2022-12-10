@@ -1,0 +1,107 @@
+<%- include('../particles/header.ejs') %>
+
+<%- include('../particles/navigation.ejs') %>
+
+<p class='auth__title'>Войти в аккаунт</p>
+<form action="/login" method="post" class="item-block">
+  <div class="form-group">
+    <label for="username" class="form-group__label">Имя пользователя </label>
+    <input type="text" class="form-group__input" name="username" required>
+    
+  </div>
+  <div class="form-group">
+    <label for="password" class="form-group__label">Пароль</label>
+    <input type="password" class="form-group__input" name="password" required>
+  </div>
+  <label for="error" class="authentication__error"><%= error %></label>
+  <input type="submit" value="Войти" class="form-button">
+</form>
+<p>Забыли данные учётной записи?<a href="/accountRecovery">Восстановить аккаунт</a></p>
+
+
+<p class='authentication__title'>Создать аккаунт</p>
+
+<form action="/register" method="post" class="item-block">
+
+  <div class="form-group">
+    <label for="username" class="form-group__label">Имя пользователя</label>
+    <input type="text" class="form-group__input" name="username" required>
+  </div>
+  <div class="form-group">
+    <label for="email" class="form-group__label">Электронная почта</label>
+    <input type="email" class="form-group__input" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required>
+  </div>
+  <div class="form-group">
+    <label for="password" class="form-group__label">Пароль</label>
+    <input type="password" class="form-group__input" name="password" required>
+  </div>
+</div>
+
+<!--Выпадающее меню-->
+<h3>Нажмите, чтобы выбрать аватар</h3>
+<div class="dropdown">
+<button onclick="myFunction()" class="dropbtn">Нажми на меня</button>
+  <div id="myDropdown" class="dropdown-content">
+    <div class="form-group">
+      <h2>Выбор аватара</h2>
+      
+      <p><input name="avatar" type="radio" value="arbuz.png" > Арбузер (Ниже Вы можете увидеть то, как будет отображаться ваш аватар)</p>
+      <img class="section__image__avatar" src="/img/avatar/default/Arbuz.png">
+      <img class="section__image__avatar__mini" src="/img/avatar/default/Arbuz.png">
+    
+      <p><input name="avatar" type="radio" value="ak630.jpg"> Калак (Ниже Вы можете увидеть то, как будет отображаться ваш аватар)</p>
+      <img class="section__image__avatar" src="/img/avatar/default/ak630.jpg">
+      <img class="section__image__avatar__mini" src="/img/avatar/default/ak630.jpg">
+    
+      <p><input name="avatar" type="radio" value="python.png"checked> Питонист (Ниже Вы можете увидеть то, как будет отображаться ваш аватар)</p>
+      <img class="section__image__avatar" src="/img/avatar/default/python.png">
+      <img class="section__image__avatar__mini" src="/img/avatar/default/python.png">
+    
+      <p><input name="avatar" type="radio" value="baget.png"> Багет (Ниже Вы можете увидеть то, как будет отображаться ваш аватар)</p>
+      <img class="section__image__avatar" src="/img/avatar/default/baget.jpg">
+      <img class="section__image__avatar__mini" src="/img/avatar/default/baget.jpg">
+    
+    
+      <p><input name="avatar" type="radio" value="baltika.jpg"> Что? (Ниже Вы можете увидеть то, как будет отображаться ваш аватар)</p>
+      <img class="section__image__avatar" src="/img/avatar/default/it.png">
+      <img class="section__image__avatar__mini" src="/img/avatar/default/it.png">
+    
+      <p><input name="avatar" type="radio" value="igor.jpg"> Игорь (Ниже Вы можете увидеть то, как будет отображаться ваш аватар)</p>
+      <img class="section__image__avatar" src="/img/avatar/default/igor.jpg">
+      <img class="section__image__avatar__mini" src="/img/avatar/default/igor.jpg">
+    
+      <p>Свой аватар (закрыто на тех.работы)</p>
+    </div>
+      <label for="RegError" class="RegAuthentication__error"><%= RegError %></label>
+      <input type="submit" value="Зарегистрироваться" class="form-button">
+    </form>
+  </div>
+</div>
+
+<script>
+/* Когда пользователь нажимает а кнопку, 
+открывается меню */
+function myFunction() {
+    document.getElementById("myDropdown").classList.toggle("show");
+}
+
+// закрывает меню, если пользователь нажимает за его границами
+window.onclick = function(event) {
+  if (!event.target.matches('.dropbtn')) {
+
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
+  }
+}
+</script>
+<!--Конец выпадающего меню-->
+
+
+
+<%- include('../particles/footer.ejs') %>
