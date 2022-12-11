@@ -47,7 +47,7 @@ export class UsersController {
             }
         }
         else res.render("login", {
-            error: "Такого пользователя не существует",
+            error: "Вы допустили ошибку или такого пользователя не существует",
             auth: req.session.auth,
             username: req.session.username,
         });
@@ -56,24 +56,41 @@ export class UsersController {
 
 
     async register (req: Request, res: Response) {
-        if (req.body.username == "" || req.body.password == "") {
-            res.render('register', {
-                RegError: "The field cannot be empty",
-                auth: req.session.auth,
-                username: req.session.username
+        if (req.body.username == "" || req.body.password == "" || req.body.avatar=="" || req.body.email=="Z") {
+            res.render('items/auth', {
+                RegError: "Заполните форму",
+                auth : req.session.auth,
+                username : req.session.username,
+                avatar: req.session.avatar
             });
+            
         } else {
             const data = await prisma.users.findFirst({
                 where: {
                     username: req.body.username
                 }
             })
+            const data2 = await prisma.users.findFirst({
+                where: {
+                    email: req.body.email
+                }
+            })
+
             if (data != null) {
-                res.render('register', {
-                    error: "Такое имя пользователя уже занято",
-                    auth: req.session.auth,
-                    username: req.session.username,
-                });
+                res.render('items/auth', {
+                    RegError: "Такое имя пользователя уже занято, повторите попытку",
+                    error: "",
+                    auth : req.session.auth,
+                    username : req.session.username,
+                    avatar: req.session.avatar
+                });}else if (data2 != null) {
+                    res.render('items/auth', {
+                        RegError: "Такая  почта пользователя уже занята, повторите попытку",
+                        error: "",
+                        auth : req.session.auth,
+                        username : req.session.username,
+                        avatar: req.session.avatar
+                    });   
             }else {
                 await prisma.users.create({
                     data: {

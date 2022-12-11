@@ -67,7 +67,7 @@ class UsersController {
             }
             else
                 res.render("login", {
-                    error: "Такого пользователя не существует",
+                    error: "Вы допустили ошибку или такого пользователя не существует",
                     auth: req.session.auth,
                     username: req.session.username,
                 });
@@ -76,11 +76,12 @@ class UsersController {
     ;
     register(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            if (req.body.username == "" || req.body.password == "") {
-                res.render('register', {
-                    RegError: "The field cannot be empty",
+            if (req.body.username == "" || req.body.password == "" || req.body.avatar == "" || req.body.email == "Z") {
+                res.render('items/auth', {
+                    RegError: "Заполните форму",
                     auth: req.session.auth,
-                    username: req.session.username
+                    username: req.session.username,
+                    avatar: req.session.avatar
                 });
             }
             else {
@@ -89,11 +90,27 @@ class UsersController {
                         username: req.body.username
                     }
                 });
+                const data2 = yield prisma.users.findFirst({
+                    where: {
+                        email: req.body.email
+                    }
+                });
                 if (data != null) {
-                    res.render('register', {
-                        error: "Такое имя пользователя уже занято",
+                    res.render('items/auth', {
+                        RegError: "Такое имя пользователя уже занято, повторите попытку",
+                        error: "",
                         auth: req.session.auth,
                         username: req.session.username,
+                        avatar: req.session.avatar
+                    });
+                }
+                else if (data2 != null) {
+                    res.render('items/auth', {
+                        RegError: "Такая  почта пользователя уже занята, повторите попытку",
+                        error: "",
+                        auth: req.session.auth,
+                        username: req.session.username,
+                        avatar: req.session.avatar
                     });
                 }
                 else {

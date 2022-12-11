@@ -13,9 +13,10 @@
     <label for="password" class="form-group__label">Пароль</label>
     <input type="password" class="form-group__input" name="password" required>
   </div>
-  <label for="error" class="authentication__error"><%= error %></label>
+  <div> <label for="error" class="authentication__error"><%= error %></label></div>
   <input type="submit" value="Войти" class="form-button">
 </form>
+
 <p>Забыли данные учётной записи?<a href="/accountRecovery">Восстановить аккаунт</a></p>
 
 
@@ -66,7 +67,8 @@
       
     
       <p>Свой аватар (закрыто на тех.работы)</p>
-<label for="RegError" class="RegAuthentication__error"><%= RegError %></label>
+      <div><label for="RegError" class="authentication__error"><%= RegError %></label></div>
       <input type="submit" value="Зарегистрироваться" class="form-button">
 </form>
+
 <%- include('../particles/footer.ejs') %>

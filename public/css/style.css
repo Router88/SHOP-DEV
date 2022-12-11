@@ -133,3 +133,7 @@ a {
   text-decoration: none; /* Убираем подчёркивание */
  }
 
+.authentication__error{
+  color:red;
+  font-size: large;
+}
