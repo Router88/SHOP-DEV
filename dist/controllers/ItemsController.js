@@ -23,7 +23,9 @@ class ItemsController {
             const items = yield prisma.items.findMany();
             res.render('items/index', {
                 'items': items,
-                auth: req.session.auth
+                auth: req.session.auth,
+                username: req.session.username,
+                avatar: req.session.avatar
             });
         });
     }
@@ -35,13 +37,18 @@ class ItemsController {
                 }
             });
             res.render('items/show', {
-                'item': item
+                'item': item,
+                auth: req.session.auth,
+                username: req.session.username,
+                avatar: req.session.avatar
             });
         });
     }
     create(req, res) {
         res.render('items/create', {
-            auth: req.session.auth
+            auth: req.session.auth,
+            username: req.session.username,
+            avatar: req.session.avatar
         });
     }
     store(req, res) {

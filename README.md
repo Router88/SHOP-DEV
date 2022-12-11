@@ -17,14 +17,3 @@
     npm run dev
 
 
-
-https://codevoweb.com/node-postgresql-upload-resize-multiple-images/
-
-
-    https://github.com/expressjs/multer/blob/master/doc/README-ru.md
-
-
-
-
-дальнейшие идеи
-    чтобы подрубить юзернэму в странице делаешь ...............

@@ -7,9 +7,9 @@
         <li><a href="/">Главная</a></li>
         <li><a href="/items">Перейти к </a></li>
         <% if (auth) { %>
-            <li><a href="/add">Добавить</a></li>
-            <li><a href="/logout">Выйти из аккаунта</a></li>
-            <li><a href="/account">Личный кабинет</a></li>
+            <li><a href="/items/action/create">Добавить</a></li>
+            <li><a href="/account">Ваш аккаунт : <%=username%> <img class="section__image__avatar__mini" src="/img/avatar/default/<%=avatar%>"></a></li>
+           <!-- <li><a href="/logout">Выйти из аккаунта</a></li>-->
             
         <% } else { %>
             <li><a href="/auth">Авторизация/регистрация</a></li>

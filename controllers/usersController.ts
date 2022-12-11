@@ -10,8 +10,9 @@ export class UsersController {
             {
                 error: "",
                 RegError: "",
-                auth: req.session.auth,
-                username: req.session.username,
+                auth : req.session.auth,
+                username : req.session.username,
+                avatar: req.session.avatar
             });
     };
     async accountRecovery (req: Request, res: Response) {
@@ -20,6 +21,7 @@ export class UsersController {
                 error: "",
                 auth: req.session.auth,
                 username: req.session.username,
+                avatar: req.session.avatar
             });
     };
     async logout (req: Request, res: Response) {
@@ -40,6 +42,7 @@ export class UsersController {
             if (compare == true) {
                 req.session.auth = true;
                 req.session.username = [req.body.username][0];
+                req.session.avatar = data.avatar;
                 res.redirect("/")
             }
         }
@@ -82,8 +85,21 @@ export class UsersController {
                 });
                 req.session.auth = true;
                 req.session.username = [req.body.username][0];
+                req.session.avatar = [req.body.avatar][0];
                 res.redirect('/');
             }
         }
     };
+
+    async account (req: Request, res: Response) {
+        res.render("items/user",
+            {
+                auth: req.session.auth,
+                username: req.session.username,
+                avatar: req.session.avatar
+            });
+    };
+
+
+
 }

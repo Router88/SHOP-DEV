@@ -11,6 +11,7 @@ const express_session_1 = __importDefault(require("express-session"));
 const app = (0, express_1.default)();
 const itemsController = new ItemsController_1.ItemsController();
 const usersController = new usersController_1.UsersController();
+;
 app.use(express_1.default.static('public'));
 app.use(express_1.default.urlencoded({ extended: true }));
 app.set('view engine', 'ejs');
@@ -29,7 +30,9 @@ app.listen(3000, () => {
 });
 app.get("/", (req, res) => {
     res.render('home', {
-        auth: req.session.auth
+        auth: req.session.auth,
+        username: req.session.username,
+        avatar: req.session.avatar
     });
 });
 app.get("/items", (req, res) => {
@@ -38,7 +41,7 @@ app.get("/items", (req, res) => {
 app.get("/items/:id", (req, res) => {
     itemsController.show(req, res);
 });
-app.get("/items/action/create", (req, res) => {
+app.get("/items/action/create", isAuth, (req, res) => {
     itemsController.create(req, res);
 });
 app.post("/store", (req, res) => {
@@ -57,7 +60,7 @@ app.get("/auth", (req, res) => {
 app.post("/login", (req, res) => {
     usersController.login(req, res);
 });
-app.post("/logout", (req, res) => {
+app.get("/logout", (req, res) => {
     usersController.logout(req, res);
 });
 app.post("/register", (req, res) => {
@@ -65,4 +68,7 @@ app.post("/register", (req, res) => {
 });
 app.get("/accountRecovery", (req, res) => {
     usersController.accountRecovery(req, res);
+});
+app.get("/account", isAuth, (req, res) => {
+    usersController.account(req, res);
 });

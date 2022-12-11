@@ -15,7 +15,9 @@ export class ItemsController {
 
         res.render('items/index', {
             'items': items,
-            auth: req.session.auth
+            auth: req.session.auth,
+            username: req.session.username,
+            avatar: req.session.avatar
         });
     }
 
@@ -29,13 +31,19 @@ export class ItemsController {
         });
 
         res.render('items/show', {
-            'item': item
+            'item': item,
+            auth: req.session.auth,
+            username: req.session.username,
+            avatar: req.session.avatar
+            
         });
     }
 
     create(req: Request, res: Response) {
         res.render('items/create',{
-            auth: req.session.auth  
+            auth: req.session.auth,
+            username: req.session.username,
+            avatar: req.session.avatar
         });
     }
 

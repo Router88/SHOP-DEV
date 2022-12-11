@@ -25,6 +25,7 @@ class UsersController {
                 RegError: "",
                 auth: req.session.auth,
                 username: req.session.username,
+                avatar: req.session.avatar
             });
         });
     }
@@ -35,6 +36,7 @@ class UsersController {
                 error: "",
                 auth: req.session.auth,
                 username: req.session.username,
+                avatar: req.session.avatar
             });
         });
     }
@@ -59,6 +61,7 @@ class UsersController {
                 if (compare == true) {
                     req.session.auth = true;
                     req.session.username = [req.body.username][0];
+                    req.session.avatar = data.avatar;
                     res.redirect("/");
                 }
             }
@@ -104,9 +107,20 @@ class UsersController {
                     });
                     req.session.auth = true;
                     req.session.username = [req.body.username][0];
+                    req.session.avatar = [req.body.avatar][0];
                     res.redirect('/');
                 }
             }
+        });
+    }
+    ;
+    account(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            res.render("items/user", {
+                auth: req.session.auth,
+                username: req.session.username,
+                avatar: req.session.avatar
+            });
         });
     }
     ;
