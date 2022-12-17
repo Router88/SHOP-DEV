@@ -6,9 +6,11 @@
     <h2 class="section__title">
         <%= item.title %>
     </h2>
+    <p><%= item.description %></p>
+    <p><%= item.category %></p>
     <img class="section__image" src="/img/<%= item.image %>">
 </div>
-
+<% if (role==1){ %>
 <form action="/update" method="post">
     <div class="form-group">
         <input value="<%= item.id %>" type="hidden" id="id">
@@ -16,26 +18,26 @@
         <input value="<%= item.title %>" class="form-group__input" type="text" id="title" name="title"
             placeholder="title">
     </div>
-
+    <div class="form-group">
+        <label class="form-group__label" for="description">description</label>
+        <input value="<%= item.description %>" class="form-group__input" type="text" id="description" name="description"
+            placeholder="image">
+    </div>
     <div class="form-group">
         <label class="form-group__label" for="image">image</label>
         <input value="<%= item.image %>" class="form-group__input" type="text" id="image" name="image"
             placeholder="image">
     </div>
 
-    <input class="form-button" type="submit" value="Update">
+    <input class="form-button" type="submit" value="Обновить">
 </form>
 
 <form action="/delete" method="post">
     <div class="form-group">
         <input value="<%= item.id %>" type="hidden" id="id">
-    <input class="form-button" type="submit" value="Update">
+    <input class="form-button" type="submit" value="Удалить">
 </form>
-
-
-
-
-
+<% } %>
 
 
 <%- include('../particles/footer.ejs') %>

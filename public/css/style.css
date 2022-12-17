@@ -24,7 +24,7 @@ h2,h3,h4{
   border-radius: 8px;
   display: inline-block;
   border: 0.5px solid rgb(0, 0, 0);
-  background-color: lightcyan;
+  background-color: rgb(255, 255, 255);
 }
 body {
   font-family: 'Open Sans', arial, sans-serif;
@@ -41,13 +41,13 @@ body {
 }
 .section__image__avatar {
   border-radius: 200px;
-  height: 200px;
+  height: auto;
   width:200px;
   border: 5px solid black;
 }
 .section__image__avatar__mini {
   border-radius: 60px;
-  height: 60px;
+  height: auto;
   width:60px;
   border: 3px solid black;
 }

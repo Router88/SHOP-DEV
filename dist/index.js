@@ -25,6 +25,18 @@ function isAuth(req, res, next) {
         res.redirect('/');
     }
 }
+function isAdmin(req, res, next) {
+    if (req.session.auth && req.session.role == 1) {
+        next();
+    }
+    else {
+        res.redirect('/');
+        console.log('not admin');
+    }
+}
+function notWorking(req, res, next) {
+    res.redirect('/');
+}
 app.listen(3000, () => {
     console.log('Server is running on port 3000');
 });
@@ -32,7 +44,8 @@ app.get("/", (req, res) => {
     res.render('home', {
         auth: req.session.auth,
         username: req.session.username,
-        avatar: req.session.avatar
+        avatar: req.session.avatar,
+        role: req.session.role
     });
 });
 app.get("/items", (req, res) => {
@@ -41,16 +54,16 @@ app.get("/items", (req, res) => {
 app.get("/items/:id", (req, res) => {
     itemsController.show(req, res);
 });
-app.get("/items/action/create", isAuth, (req, res) => {
+app.get("/items/action/create", isAdmin, (req, res) => {
     itemsController.create(req, res);
 });
-app.post("/store", (req, res) => {
+app.post("/store", isAdmin, (req, res) => {
     itemsController.store(req, res);
 });
-app.post("/update", (req, res) => {
+app.post("/update", isAdmin, (req, res) => {
     itemsController.update(req, res);
 });
-app.post("/delete", (req, res) => {
+app.post("/delete", isAdmin, (req, res) => {
     itemsController.delete(req, res);
 });
 //users
@@ -69,6 +82,6 @@ app.post("/register", (req, res) => {
 app.get("/accountRecovery", (req, res) => {
     usersController.accountRecovery(req, res);
 });
-app.get("/account", isAuth, (req, res) => {
+app.get("/account", (req, res) => {
     usersController.account(req, res);
 });

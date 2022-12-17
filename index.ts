@@ -3,6 +3,7 @@ import path from 'path';
 import { ItemsController } from './controllers/ItemsController';
 import { UsersController } from './controllers/usersController';
 import session from 'express-session';
+import internal from 'stream';
 const app: Express = express();
 const itemsController = new ItemsController();
 const usersController = new UsersController();
@@ -14,9 +15,11 @@ declare module "express-session" {
       auth: boolean,
       username: string,
       email : string;
-      role: string;
+      role: number;
       description:string;
       avatar : string;
+      author : string;
+      category_id : number;
   }
 };
 app.use(express.static('public'));
@@ -33,6 +36,20 @@ function isAuth(req: Request, res: Response, next : any) {
   }
 }
 
+function isAdmin(req: Request, res: Response, next : any) {
+  if (req.session.auth && req.session.role==1) {
+    next();
+  } else {
+    res.redirect('/');
+    console.log('not admin')
+  }
+}
+
+function border(req: Request, res: Response, next : any) {
+  //dont access
+    res.redirect('/');
+}
+
 app.listen(3000, () => {
   console.log('Server is running on port 3000');
 });
@@ -41,7 +58,8 @@ app.get("/",(req: Request, res: Response) => {
   res.render('home',{
     auth: req.session.auth,
      username: req.session.username,
-     avatar: req.session.avatar
+     avatar: req.session.avatar,
+     role: req.session.role
   });
  
 });
@@ -50,37 +68,40 @@ app.get("/items", (req: Request, res: Response) => {
   itemsController.index(req, res);
 });
 
+// items
 app.get("/items/:id", (req: Request, res: Response) => {
   itemsController.show(req, res);
 });
 
-app.get("/items/action/create",isAuth, (req: Request, res: Response) => {
+app.get("/items/create", isAdmin, (req: Request, res: Response) => {
   itemsController.create(req, res);
 });
 
-app.post("/store", (req: Request, res: Response) => {
+app.post("/items/store", isAdmin,  (req: Request, res: Response) => {
   itemsController.store(req, res);
 });
 
-app.post("/update", (req: Request, res: Response) => {
+app.post("/items/update", isAdmin,  (req: Request, res: Response) => {
   itemsController.update(req, res);
 });
 
-app.post("/delete", (req: Request, res: Response) => {
+app.post("/items/delete", isAdmin,  (req: Request, res: Response) => {
   itemsController.delete(req, res);
 });
-
 
 //users
 app.get("/auth", (req: Request, res: Response) => {
   usersController.auth(req, res);
 });
+
 app.post("/login", (req: Request, res: Response) => {
   usersController.login(req, res);
 });
+
 app.get("/logout", (req: Request, res: Response) => {
   usersController.logout(req, res);
 });
+
 app.post("/register", (req: Request, res: Response) => {
   usersController.register(req, res);
 });
@@ -89,11 +110,9 @@ app.get("/accountRecovery", (req: Request, res: Response) => {
   usersController.accountRecovery(req, res);
 });
 
-app.get("/account",isAuth, (req: Request, res: Response) => {
+app.get("/account", (req: Request, res: Response) => {
   usersController.account(req, res);
 });
-
-
 
 
 

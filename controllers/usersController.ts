@@ -27,6 +27,8 @@ export class UsersController {
     async logout (req: Request, res: Response) {
         req.session.auth = false;
         req.session.username = undefined;
+        req.session.avatar = undefined;
+        req.session.role = undefined;
         res.redirect("/");
     };
 
@@ -43,6 +45,7 @@ export class UsersController {
                 req.session.auth = true;
                 req.session.username = [req.body.username][0];
                 req.session.avatar = data.avatar;
+                req.session.role = data.role;
                 res.redirect("/")
             }
         }
@@ -103,6 +106,7 @@ export class UsersController {
                 req.session.auth = true;
                 req.session.username = [req.body.username][0];
                 req.session.avatar = [req.body.avatar][0];
+                req.session.role=[req.body.role][0]
                 res.redirect('/');
             }
         }

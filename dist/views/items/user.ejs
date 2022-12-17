@@ -6,6 +6,58 @@
     <img class="section__image__avatar" src="/img/avatar/default/<%=avatar%>"></a>
     </div>
     <p class="label">Данные о пользователе</p>
-    <a href="/logout">Выйти из аккаунта</a>
+
+    <% if (auth) { %>
+        <a href="/logout">Выйти из аккаунта</a>
+        <p class="label">Изменить</p>
+        <form action="/accountUpdate" method="post" class="item-block">
+
+            <div class="form-group">
+              <label for="username" class="form-group__label">Имя пользователя</label>
+              <input type="text" class="form-group__input" name="username" minlength="2" maxlength="15" value="<%=username%>" >
+            </div>
+            <div class="form-group">
+              <label for="email" class="form-group__label">Электронная почта</label>
+              <input type="email" class="form-group__input" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" >
+            </div>
+            <div class="form-group">
+              <label for="password" class="form-group__label">Пароль</label>
+              <input type="password" class="form-group__input" name="password" minlength="2" maxlength="20" >
+            </div>
+          </div>
+          
+                <h2>Выбор аватара</h2>
+                <div class="section__div__avatar">
+                <p><input class="avatar__choose" name="avatar" type="radio" value="ak630.jpg"> Пушка </p>
+                <img class="section__image__avatar" src="/img/avatar/default/ak630.jpg">
+                <img class="section__image__avatar__mini" src="/img/avatar/default/ak630.jpg">
+              </div>
+          
+                <div class="section__div__avatar">
+                <p><input class="avatar__choose" name="avatar" type="radio" value="python.png"checked> Программист</p>
+                <img class="section__image__avatar" src="/img/avatar/default/python.png">
+                <img class="section__image__avatar__mini" src="/img/avatar/default/python.png">
+              </div>
+          
+              <div class="section__div__avatar"><p><input class="avatar__choose" name="avatar" type="radio" value="baget.png"> Багет </p>
+                <img class="section__image__avatar" src="/img/avatar/default/baget.jpg">
+                <img class="section__image__avatar__mini" src="/img/avatar/default/baget.jpg"></div>
+                
+                <div class="section__div__avatar"><p><input class="avatar__choose" name="avatar" type="radio" value="it.png"> Что?</p>
+                  <img class="section__image__avatar" src="/img/avatar/default/it.png">
+                  <img class="section__image__avatar__mini" src="/img/avatar/default/it.png"></div>
+        
+                <div class="section__div__avatar"><p><input class="avatar__choose"  name="avatar" type="radio" value="igor.jpg"> Маша</p>
+                  <img class="section__image__avatar" src="/img/avatar/default/igor.jpg">
+                  <img class="section__image__avatar__mini" src="/img/avatar/default/igor.jpg"></div>
+                <p>Свой аватар (закрыто на тех.работы)</p>
+                <input type="submit" value="Обновить" class="form-button">
+          </form>
+    <% } else { %>
+        
+    <% } %>
+    
+    
+
     
 <%- include('../particles/footer.ejs') %>

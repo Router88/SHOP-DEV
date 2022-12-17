@@ -11,31 +11,33 @@ datasource db {
 }
 
 model items {
-  id    Int    @id @default(autoincrement())
-  title String @db.VarChar(255)
-  image String @db.VarChar(255)
-  description String @db.VarChar(255)
-  author String @db.VarChar(255)
-  category_id Int @db.Int
+  id          Int       @id @default(autoincrement())
+  title       String?   @db.VarChar(255)
+  image       String?   @db.VarChar(255)
+  description String?   @db.VarChar(255)
+  author      String?   @db.VarChar(255)
+  category_id Int       @db.Int
 }
 
 model users {
-  id    Int    @id @default(autoincrement())
-  username String @db.VarChar(255)
-  password String @db.VarChar(255)
-  avatar  String @db.VarChar(255)
-  email String @db.VarChar(255)
-  role Int @default(0)
+  id       Int     @id @default(autoincrement())
+  username String? @db.VarChar(255)
+  password String? @db.VarChar(255)
+  avatar   String? @db.VarChar(255)
+  email    String? @db.VarChar(255)
+  role     Int   @default(0)
 }
-model category{
-  id    Int    @id @default(autoincrement())
-  name String @db.VarChar(255)
-  description String @db.VarChar(255)
+
+model category {
+  id          Int     @id @default(autoincrement())
+  title        String? @db.VarChar(255)
+  description String? @db.VarChar(255)
 }
+
 model comments {
-  id    Int    @id @default(autoincrement())
-  content String @db.VarChar(255)
-  date String @db.VarChar(255)
-  item_id String @db.VarChar(255)
+  id      Int     @id @default(autoincrement())
+  content String? @db.VarChar(255)
+  date    String? @db.VarChar(255)
+  item_id Int    @db.Int
   user_id Int    @db.Int
 }

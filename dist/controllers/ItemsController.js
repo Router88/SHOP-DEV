@@ -40,7 +40,8 @@ class ItemsController {
                 'item': item,
                 auth: req.session.auth,
                 username: req.session.username,
-                avatar: req.session.avatar
+                avatar: req.session.avatar,
+                role: req.session.role
             });
         });
     }
@@ -48,17 +49,32 @@ class ItemsController {
         res.render('items/create', {
             auth: req.session.auth,
             username: req.session.username,
-            avatar: req.session.avatar
+            avatar: req.session.avatar,
+            role: req.session.role
         });
     }
     store(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const { title, image, description } = req.body;
+            const { title, image, description, author, category_id } = req.body;
             yield prisma.items.create({
                 data: {
                     title,
                     image,
-                    description
+                    description,
+                    author,
+                    category_id
+                }
+            });
+            res.redirect('/');
+        });
+    }
+    storeCategory(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const { title, description } = req.body;
+            yield prisma.category.create({
+                data: {
+                    title,
+                    description,
                 }
             });
             res.redirect('/');
@@ -66,14 +82,16 @@ class ItemsController {
     }
     update(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const { id, title, image } = req.body;
+            const { id, title, image, description, category_id } = req.body;
             yield prisma.items.update({
                 where: {
                     id: Number(id),
                 },
                 data: {
                     title,
-                    image
+                    image,
+                    description,
+                    category_id
                 }
             });
             res.redirect('/');
