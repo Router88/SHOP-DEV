@@ -44,8 +44,9 @@ export class UsersController {
             if (compare == true) {
                 req.session.auth = true;
                 req.session.username = [req.body.username][0];
-                req.session.avatar = data.avatar;
+                req.session.avatar = data.avatar; //не трогать, всё работает правильно
                 req.session.role = data.role;
+                req.session.messageAlert = 'Авторизация прошла удачно';
                 res.redirect("/")
             }
         }
@@ -59,7 +60,7 @@ export class UsersController {
 
 
     async register (req: Request, res: Response) {
-        if (req.body.username == "" || req.body.password == "" || req.body.avatar=="" || req.body.email=="Z") {
+        if (req.body.username == "" || req.body.password == "" || req.body.avatar=="" || req.body.email=="") {
             res.render('items/auth', {
                 RegError: "Заполните форму",
                 auth : req.session.auth,
@@ -107,6 +108,7 @@ export class UsersController {
                 req.session.username = [req.body.username][0];
                 req.session.avatar = [req.body.avatar][0];
                 req.session.role=[req.body.role][0]
+                req.session.messageAlert = 'Регистрация прошла удачно';
                 res.redirect('/');
             }
         }

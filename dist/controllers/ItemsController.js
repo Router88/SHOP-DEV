@@ -15,6 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.ItemsController = void 0;
 const client_1 = require("@prisma/client");
 const multer_1 = __importDefault(require("multer"));
+//import { } from './functions'; //файл для функций, которых нет, но могут добавиться позже
 const upload = (0, multer_1.default)({ dest: "public/img/" });
 const prisma = new client_1.PrismaClient();
 class ItemsController {
@@ -25,7 +26,9 @@ class ItemsController {
                 'items': items,
                 auth: req.session.auth,
                 username: req.session.username,
-                avatar: req.session.avatar
+                avatar: req.session.avatar,
+                role: req.session.role,
+                messageAlert: req.session.messageAlert
             });
         });
     }
@@ -41,7 +44,8 @@ class ItemsController {
                 auth: req.session.auth,
                 username: req.session.username,
                 avatar: req.session.avatar,
-                role: req.session.role
+                role: req.session.role,
+                messageAlert: req.session.messageAlert
             });
         });
     }
@@ -50,7 +54,8 @@ class ItemsController {
             auth: req.session.auth,
             username: req.session.username,
             avatar: req.session.avatar,
-            role: req.session.role
+            role: req.session.role,
+            messageAlert: req.session.messageAlert
         });
     }
     store(req, res) {
@@ -61,10 +66,10 @@ class ItemsController {
                     title,
                     image,
                     description,
-                    author,
                     category_id
                 }
             });
+            req.session.messageAlert = 'Сохранено удачно';
             res.redirect('/');
         });
     }
@@ -77,6 +82,7 @@ class ItemsController {
                     description,
                 }
             });
+            req.session.messageAlert = 'Категория обновлена удачно';
             res.redirect('/');
         });
     }
@@ -94,6 +100,7 @@ class ItemsController {
                     category_id
                 }
             });
+            req.session.messageAlert = 'Обновлено удачно';
             res.redirect('/');
         });
     }
@@ -105,7 +112,39 @@ class ItemsController {
                     id: Number(id),
                 }
             });
+            req.session.messageAlert = 'Удалено удачно';
             res.redirect('/');
+        });
+    }
+    //главная страни
+    // async home(req: Request, res: Response) {
+    //     //запрос категорий
+    //     const category = await prisma.category.findUnique({
+    //         where: {
+    //             id: Number(req.params.id)
+    //         }
+    //     });
+    //
+    //     res.render('home', {
+    //         'category': category,
+    //         auth: req.session.auth,
+    //         username: req.session.username,
+    //         avatar: req.session.avatar,
+    //         role: req.session.role,
+    //         messageAlert : req.session.messageAlert
+    //     });
+    //   }
+    home(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const items = yield prisma.category.findMany();
+            res.render('home', {
+                'category': items,
+                auth: req.session.auth,
+                username: req.session.username,
+                avatar: req.session.avatar,
+                role: req.session.role,
+                messageAlert: req.session.messageAlert
+            });
         });
     }
 }

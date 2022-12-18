@@ -1,6 +1,6 @@
 <div class="navigation">
     <a href="/">
-        <span class="logo">NIZAGAM</span>
+        <span class="logo">INZAGAM</span>
     </a>
     
     <ul> 
@@ -14,6 +14,11 @@
         <% } else { %>
             <li><a href="/auth">Авторизация/регистрация</a></li>
         <% } %>
-        
+        <li><form action="/items/find" method="post" class="">
+            <input type="text" name="search" class="">
+            <input type="submit" value="Поиск" class="">
+        </form></li>
     </ul>
+    <div class="alert"><p><%=messageAlert%></p></div>
     </div>
+    

@@ -3,6 +3,7 @@
 
 generator client {
   provider = "prisma-client-js"
+  previewFeatures = ["fullTextSearch"]
 }
 
 datasource db {
@@ -15,10 +16,16 @@ model items {
   title       String?   @db.VarChar(255)
   image       String?   @db.VarChar(255)
   description String?   @db.VarChar(255)
-  author      String?   @db.VarChar(255)
-  category_id Int       @db.Int
+  category     category? @relation(fields: [category_id], references: [id])
+  category_id   Int?        @db.Int
+  comments      comments[]
 }
-
+model category {
+  id          Int     @id @default(autoincrement())
+  title        String? @db.VarChar(255)
+  description String? @db.VarChar(255)
+  items items[]
+}
 model users {
   id       Int     @id @default(autoincrement())
   username String? @db.VarChar(255)
@@ -28,16 +35,14 @@ model users {
   role     Int   @default(0)
 }
 
-model category {
-  id          Int     @id @default(autoincrement())
-  title        String? @db.VarChar(255)
-  description String? @db.VarChar(255)
+model comments {
+  id            Int     @id @default(autoincrement())
+  commentary    String? @db.Text
+  date_creating String? @db.VarChar(64)
+  author        String? @db.VarChar(255)
+  item          items?  @relation(fields: [item_id], references: [id], onDelete: Cascade)
+  item_id       Int?    @db.Int
 }
 
-model comments {
-  id      Int     @id @default(autoincrement())
-  content String? @db.VarChar(255)
-  date    String? @db.VarChar(255)
-  item_id Int    @db.Int
-  user_id Int    @db.Int
-}
+
+

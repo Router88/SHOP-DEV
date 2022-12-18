@@ -120,6 +120,15 @@ li:hover{
   box-shadow: 0 0 5px;
  
 }
+.alert{
+  position:sticky;
+  font-size: xx-large;
+  color:red;
+  width: 150px;
+  height: auto;
+  text-align: center;
+  padding-left: 175px;
+}
 .footer{
   background-color: rgb(83, 79, 79);
   display: block;

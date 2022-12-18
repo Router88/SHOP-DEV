@@ -3,11 +3,10 @@ import path from 'path';
 import { ItemsController } from './controllers/ItemsController';
 import { UsersController } from './controllers/usersController';
 import session from 'express-session';
-import internal from 'stream';
+import internal from 'stream';// не помню, чтобы этот импорт был нужен, но чтобы ничего не ломать лучше оставить
 const app: Express = express();
 const itemsController = new ItemsController();
 const usersController = new UsersController();
-//import './controllers/declareController'
 
 // чтобы работало нормально
 declare module "express-session" {
@@ -20,6 +19,7 @@ declare module "express-session" {
       avatar : string;
       author : string;
       category_id : number;
+      messageAlert : string;
   }
 };
 app.use(express.static('public'));
@@ -35,6 +35,9 @@ function isAuth(req: Request, res: Response, next : any) {
     res.redirect('/');
   }
 }
+
+
+ 
 
 function isAdmin(req: Request, res: Response, next : any) {
   if (req.session.auth && req.session.role==1) {
@@ -54,15 +57,11 @@ app.listen(3000, () => {
   console.log('Server is running on port 3000');
 });
 
-app.get("/",(req: Request, res: Response) => {
-  res.render('home',{
-    auth: req.session.auth,
-     username: req.session.username,
-     avatar: req.session.avatar,
-     role: req.session.role
-  });
- 
+
+app.get("/", (req: Request, res: Response) => {
+  itemsController.home(req, res);
 });
+
 
 app.get("/items", (req: Request, res: Response) => {
   itemsController.index(req, res);
@@ -98,7 +97,7 @@ app.post("/login", (req: Request, res: Response) => {
   usersController.login(req, res);
 });
 
-app.get("/logout", (req: Request, res: Response) => {
+app.get("/logout",isAuth, (req: Request, res: Response) => {
   usersController.logout(req, res);
 });
 
@@ -110,7 +109,7 @@ app.get("/accountRecovery", (req: Request, res: Response) => {
   usersController.accountRecovery(req, res);
 });
 
-app.get("/account", (req: Request, res: Response) => {
+app.get("/account",isAuth, (req: Request, res: Response) => {
   usersController.account(req, res);
 });
 

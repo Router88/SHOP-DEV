@@ -1,43 +1,43 @@
 const { Prismaclient, PrismaClient } = require('@prisma/client');
+const { type } = require('os');
 const prisma = new PrismaClient();
 
-const seed = process.env.npm_config_seedNumber;
+const seed = process.env.npm_config_seedType;
 
-console.log(seed)
-console.log(typeof seed)
+console.log('Seed value = '+seed + 'Seed type =' +typeof seed)
 
 async function main(seed) {
-    let dataCategory = undefined;
-    let dataItems = undefined;
-    if (seed != undefined || seed != null || seed != NaN) {
+    console.log('-----Starting-----')
+    if (seed != undefined || seed != NaN) {
         switch (seed) {
             case "test":
-               //dataItems=[
-               //    { title: 'nature1', image: 'nature1.jpeg', description: 'the nature with cat 1', category_id: '1' },
-               //    { title: 'nature2', image: 'nature2.jpeg', description: 'the nature with cat 2', category_id: '2' },
-               //];
-               //dataCategory=[
-               //    { title: 'Category1', description: 'The test category' },
-               //    { title: 'Category2', description: 'The second test category' },
-               //];
-               const createItems = await prisma.items.createMany({
-                    data:[
-                        { title: 'nature1', image: 'nature1.jpeg', description: 'the nature with cat 1', category_id: 1 },
-                        { title: 'nature2', image: 'nature2.jpeg', description: 'the nature with cat 2', category_id: 2 },
-                    ],
-                    skipDuplicates: true,
-                })
-                const createCategories = await prisma.category.createMany({
-                    data:[
-                        { title: 'Category1', description: 'The test category' },
-                        { title: 'Category2', description: 'The second test category' },
-                    ],
-                    skipDuplicates: true,
-                })
-                break;
-            //case project:
-            //сюда делать сам проект      
-            //break;      
+                try {
+                    console.log('-----Creating the Test database values (Items,Categories)-----')
+                    const createItems = await prisma.items.createMany({
+                         data:[
+                             { title: 'nature1', image: 'nature1.jpeg', description: 'the nature with cat 1', category_id: 1 },
+                             { title: 'nature2', image: 'nature2.jpeg', description: 'the nature with cat 2', category_id: 2 },
+                         ],
+                         skipDuplicates: true,
+                     })
+                     const createCategories = await prisma.category.createMany({
+                         data:[
+                             { title: 'Category1', description: 'The test category' },
+                             { title: 'Category2', description: 'The second test category' },
+                         ],
+                         skipDuplicates: true,
+                     })
+                     console.log('-----Done-----');
+                     break;
+                  } catch(err) {
+                    console.log('SOMETHING WENT WRONG! Error: ' +err);
+                    break;
+                  }
+                
+                
+            case project:
+                 //основной вариант заполнения базы данных
+            break;      
         }
     }
     

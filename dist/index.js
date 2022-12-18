@@ -34,36 +34,33 @@ function isAdmin(req, res, next) {
         console.log('not admin');
     }
 }
-function notWorking(req, res, next) {
+function border(req, res, next) {
+    //dont access
     res.redirect('/');
 }
 app.listen(3000, () => {
     console.log('Server is running on port 3000');
 });
 app.get("/", (req, res) => {
-    res.render('home', {
-        auth: req.session.auth,
-        username: req.session.username,
-        avatar: req.session.avatar,
-        role: req.session.role
-    });
+    itemsController.home(req, res);
 });
 app.get("/items", (req, res) => {
     itemsController.index(req, res);
 });
+// items
 app.get("/items/:id", (req, res) => {
     itemsController.show(req, res);
 });
-app.get("/items/action/create", isAdmin, (req, res) => {
+app.get("/items/create", isAdmin, (req, res) => {
     itemsController.create(req, res);
 });
-app.post("/store", isAdmin, (req, res) => {
+app.post("/items/store", isAdmin, (req, res) => {
     itemsController.store(req, res);
 });
-app.post("/update", isAdmin, (req, res) => {
+app.post("/items/update", isAdmin, (req, res) => {
     itemsController.update(req, res);
 });
-app.post("/delete", isAdmin, (req, res) => {
+app.post("/items/delete", isAdmin, (req, res) => {
     itemsController.delete(req, res);
 });
 //users
@@ -73,7 +70,7 @@ app.get("/auth", (req, res) => {
 app.post("/login", (req, res) => {
     usersController.login(req, res);
 });
-app.get("/logout", (req, res) => {
+app.get("/logout", isAuth, (req, res) => {
     usersController.logout(req, res);
 });
 app.post("/register", (req, res) => {
@@ -82,6 +79,6 @@ app.post("/register", (req, res) => {
 app.get("/accountRecovery", (req, res) => {
     usersController.accountRecovery(req, res);
 });
-app.get("/account", (req, res) => {
+app.get("/account", isAuth, (req, res) => {
     usersController.account(req, res);
 });

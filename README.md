@@ -17,7 +17,7 @@
     npm run dev
 Выбор сида 
 
-    npm run seed  --seedNumber=1 
+    npm run seed  --seedNumber=test //заполнение базы данных для тестирования и презентации функций 
     где число после "=" является аргументом, который принимает функция в файле seed.js
     НЕ ЗАПУСКАТЬ БОЛЬШЕ ОДНОГО РАЗА(исправлю это потом)
 Администрирование
@@ -29,6 +29,11 @@
 TODO
 добавь информационный блок на главной странице, который будет писать об успешном сохранении/регистрации/другом  (по примеру ошибки при регистрации)
 добавь создании/добавление категории
-https://stackoverflow.com/questions/11580961/sending-command-line-arguments-to-npm-script
+
+добавь поиск на странице
 
 изменить функцию seed чтобы не добавлялись по новой дубликаты 
+
+Краткий сборник литературы 
+https://www.prisma.io/docs/concepts/components/prisma-client/full-text-search
+https://stackoverflow.com/questions/11580961/sending-command-line-arguments-to-npm-script
