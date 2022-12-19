@@ -88,6 +88,11 @@ app.post("/items/delete", isAdmin,  (req: Request, res: Response) => {
   itemsController.delete(req, res);
 });
 
+
+app.get("/category/:id", (req: Request, res: Response) => {
+  itemsController.showCat(req, res);
+});
+
 //users
 app.get("/auth", (req: Request, res: Response) => {
   usersController.auth(req, res);

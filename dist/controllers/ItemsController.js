@@ -116,6 +116,21 @@ class ItemsController {
             res.redirect('/');
         });
     }
+    //   async showCat(req: Request, res: Response) {
+    //     const category = await prisma.category.findUnique({
+    //         where: {
+    //             id: Number(req.params.id)
+    //         }
+    //     });
+    //     res.render('items/categoryShow', {
+    //         'category': category,
+    //         auth: req.session.auth,
+    //         username: req.session.username,
+    //         avatar: req.session.avatar,
+    //         role: req.session.role,
+    //         messageAlert : req.session.messageAlert
+    //     });
+    // }
     //главная страни
     // async home(req: Request, res: Response) {
     //     //запрос категорий

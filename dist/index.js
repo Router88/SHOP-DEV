@@ -63,6 +63,9 @@ app.post("/items/update", isAdmin, (req, res) => {
 app.post("/items/delete", isAdmin, (req, res) => {
     itemsController.delete(req, res);
 });
+app.get("/category/:id", (req, res) => {
+    itemsController.showCat(req, res);
+});
 //users
 app.get("/auth", (req, res) => {
     usersController.auth(req, res);

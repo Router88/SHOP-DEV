@@ -104,24 +104,25 @@ export class ItemsController {
         req.session.messageAlert = 'Удалено удачно';
         res.redirect('/');
     }
-//главная страни
-// async home(req: Request, res: Response) {
-//     //запрос категорий
-//     const category = await prisma.category.findUnique({
-//         where: {
-//             id: Number(req.params.id)
-//         }
-//     });
-//
-//     res.render('home', {
-//         'category': category,
-//         auth: req.session.auth,
-//         username: req.session.username,
-//         avatar: req.session.avatar,
-//         role: req.session.role,
-//         messageAlert : req.session.messageAlert
-//     });
- //   }
+
+ //   async showCat(req: Request, res: Response) {
+  //     const category = await prisma.category.findUnique({
+  //         where: {
+  //             id: Number(req.params.id)
+  //         }
+  //     });
+
+  //     res.render('items/categoryShow', {
+  //         'category': category,
+  //         auth: req.session.auth,
+  //         username: req.session.username,
+  //         avatar: req.session.avatar,
+  //         role: req.session.role,
+  //         messageAlert : req.session.messageAlert
+  //     });
+  // }
+
+
     async home(req: Request, res: Response) {
         const items = await prisma.category.findMany();
 
