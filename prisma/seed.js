@@ -35,8 +35,9 @@ async function main(seed) {
                   }
                 
                 
-            case project:
+            case "project":
                  //основной вариант заполнения базы данных
+                 console.log('Не работает')
             break;      
         }
     }

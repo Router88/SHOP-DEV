@@ -105,22 +105,22 @@ export class ItemsController {
         res.redirect('/');
     }
 
- //   async showCat(req: Request, res: Response) {
-  //     const category = await prisma.category.findUnique({
-  //         where: {
-  //             id: Number(req.params.id)
-  //         }
-  //     });
+     async showCat(req: Request, res: Response) {
+      const items = await prisma.items.findMany({
+          where: {
+              category_id: Number(req.params.id)
+          }
+      });
 
-  //     res.render('items/categoryShow', {
-  //         'category': category,
-  //         auth: req.session.auth,
-  //         username: req.session.username,
-  //         avatar: req.session.avatar,
-  //         role: req.session.role,
-  //         messageAlert : req.session.messageAlert
-  //     });
-  // }
+      res.render('items/categoryShow', {
+          'items': items,
+          auth: req.session.auth,
+          username: req.session.username,
+          avatar: req.session.avatar,
+          role: req.session.role,
+          messageAlert : req.session.messageAlert
+      });
+  }
 
 
     async home(req: Request, res: Response) {
