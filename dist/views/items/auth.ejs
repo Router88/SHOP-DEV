@@ -39,19 +39,18 @@
 </div>
 
       <h2>Выбор аватара</h2>
+      <div class="section__div__avatar__wrapper">
       <div class="section__div__avatar">
       <p><input class="avatar__choose" name="avatar" type="radio" value="ak630.jpg"> Пушка </p>
       <img class="section__image__avatar" src="/img/avatar/default/ak630.jpg">
-      <img class="section__image__avatar__mini" src="/img/avatar/default/ak630.jpg">
-    </div>
+      <img class="section__image__avatar__mini" src="/img/avatar/default/ak630.jpg"></div>
 
       <div class="section__div__avatar">
       <p><input class="avatar__choose" name="avatar" type="radio" value="python.png"checked> Программист</p>
       <img class="section__image__avatar" src="/img/avatar/default/python.png">
-      <img class="section__image__avatar__mini" src="/img/avatar/default/python.png">
-    </div>
+      <img class="section__image__avatar__mini" src="/img/avatar/default/python.png"></div>
 
-    <div class="section__div__avatar"><p><input class="avatar__choose" name="avatar" type="radio" value="baget.png"> Багет </p>
+    <div class="section__div__avatar"><p><input class="avatar__choose" name="avatar" type="radio" value="baget.jpg"> Багет </p>
       <img class="section__image__avatar" src="/img/avatar/default/baget.jpg">
       <img class="section__image__avatar__mini" src="/img/avatar/default/baget.jpg"></div>
       
@@ -61,12 +60,14 @@
         <img class="section__image__avatar__mini" src="/img/avatar/default/it.png"></div>
       
     
-      <div class="section__div__avatar"><p><input class="avatar__choose"  name="avatar" type="radio" value="igor.jpg"> Маша</p>
+      <div class="section__div__avatar"><p><input class="avatar__choose"  name="avatar" type="radio" value="igor.jpg"> Второй аватар</p>
         <img class="section__image__avatar" src="/img/avatar/default/igor.jpg">
         <img class="section__image__avatar__mini" src="/img/avatar/default/igor.jpg"></div>
-      
+
     
-      <p>Свой аватар (закрыто на тех.работы)</p>
+      
+    </div>
+    <p>Свой аватар (закрыто на тех.работы)</p>
       <div><label for="RegError" class="authentication__error"><%= RegError %></label></div>
       <input type="hidden" class="form-group__input" name="role" value="0">
       <input type="submit" value="Зарегистрироваться" class="form-button">

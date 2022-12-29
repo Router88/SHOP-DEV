@@ -16,13 +16,14 @@ model items {
   title       String?   @db.VarChar(255)
   image       String?   @db.VarChar(255)
   description String?   @db.VarChar(255)
-  category     category? @relation(fields: [category_id], references: [id])
+  price String?   @db.VarChar(255)
+  category     category? @relation(fields: [category_id], references: [id], onDelete: Cascade)
   category_id   Int?        @db.Int
   comments      comments[]
 }
 model category {
   id          Int     @id @default(autoincrement())
-  title        String? @db.VarChar(255)
+  title       String? @db.VarChar(255)
   description String? @db.VarChar(255)
   items items[]
 }
@@ -38,11 +39,10 @@ model users {
 model comments {
   id            Int     @id @default(autoincrement())
   commentary    String? @db.Text
-  date_creating String? @db.VarChar(64)
+  //date_creating String? @db.VarChar(64)
   author        String? @db.VarChar(255)
   item          items?  @relation(fields: [item_id], references: [id], onDelete: Cascade)
   item_id       Int?    @db.Int
 }
-
 
 

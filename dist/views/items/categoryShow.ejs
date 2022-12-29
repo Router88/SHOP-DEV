@@ -11,11 +11,11 @@
       </p>
     </div>
   <% }else{%>
-    <% for (let i = 0; i < item.length; i++) { %>
+    <% for (let i = 0; i < items.length; i++) { %>
         <div class="section">
-            <a href="/items/<%= items[i].id %>">
+            <a href="/items/show/<%= items[i].id %>">
                 <h2 class="section__title"><%= items[i].title %></h2>
-                <img class="section__image" src="img/<%= items[i].image %>">
+                <img class="section__image" src="/img/items/<%= items[i].image %>">
             </a>
         </div>
     <% } %>

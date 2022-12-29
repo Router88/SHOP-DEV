@@ -27,6 +27,7 @@
           </div>
           
                 <h2>Выбор аватара</h2>
+                <div class="section__div__avatar__wrapper">
                 <div class="section__div__avatar">
                 <p><input class="avatar__choose" name="avatar" type="radio" value="ak630.jpg"> Пушка </p>
                 <img class="section__image__avatar" src="/img/avatar/default/ak630.jpg">
@@ -50,7 +51,9 @@
                 <div class="section__div__avatar"><p><input class="avatar__choose"  name="avatar" type="radio" value="igor.jpg"> Маша</p>
                   <img class="section__image__avatar" src="/img/avatar/default/igor.jpg">
                   <img class="section__image__avatar__mini" src="/img/avatar/default/igor.jpg"></div>
+                  </div>
                 <p>Свой аватар (закрыто на тех.работы)</p>
+                <input type="hidden" name="id" value="<%=username%>">
                 <input type="submit" value="Обновить" class="form-button">
           </form>
     <% } else { %>

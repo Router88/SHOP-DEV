@@ -5,10 +5,11 @@
     
     <ul> 
         <li><a href="/">Главная</a></li>
-        <li><a href="/items">Перейти к </a></li>
+        <li><a href="/items">Перейти ко всем товарам </a></li>
         <% if (auth) { %>
-            <li><a href="/items/action/create">Добавить</a></li>
-            <li><a href="/account">Ваш аккаунт : <%=username%> <img class="section__image__avatar__mini" src="/img/avatar/default/<%=avatar%>"></a></li>
+            <li><a href="/items/create">Добавить</a></li>
+            <li><a href="#">Корзина</a></li>
+            <li><a href="/account">Ваш аккаунт : <%=username%> <img class="section__image__avatar__mini" src="../img/avatar/default/<%=avatar%>"></a></li>
            <!-- <li><a href="/logout">Выйти из аккаунта</a></li>-->
             
         <% } else { %>
@@ -19,6 +20,8 @@
             <input type="submit" value="Поиск" class="">
         </form></li>
     </ul>
-    <div class="alert"><p><%=messageAlert%></p></div>
+    <% if(typeof messageAlert !== 'undefined'){ %>
+    <div class="alert"><p><%= messageAlert %></p></div>
+    <% } %>
     </div>
     
